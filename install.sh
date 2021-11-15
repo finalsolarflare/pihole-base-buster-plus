@@ -17,14 +17,18 @@ mkdir -p /etc/stubby \
 if [[ ${TARGETPLATFORM} =~ "arm" ]]
 then 
     cd /tmp \
-    && wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.tgz \
-    && tar -xvzf ./cloudflared-stable-linux-arm.tgz \
-    && cp ./cloudflared /usr/local/bin \
-    && rm -f ./cloudflared-stable-linux-arm.tgz \
+    # && wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.tgz \
+    && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm.deb \
+    # && tar -xvzf ./cloudflared-stable-linux-arm.tgz \
+    # && cp ./cloudflared /usr/local/bin \
+    # && rm -f ./cloudflared-stable-linux-arm.tgz \
+    && apt install ./cloudflared-linux-arm.deb \
+    && rm -f ./cloudflared-stable-linux-arm.deb \
     && echo "Cloudflared installed for arm due to tag ${TAG}"
 else 
     cd /tmp \
-    && wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
+    # && wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.deb \
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb \
     && apt install ./cloudflared-stable-linux-amd64.deb \
     && rm -f ./cloudflared-stable-linux-amd64.deb \
     && echo "Cloudflared installed for amd64 due to tag ${TAG}"
